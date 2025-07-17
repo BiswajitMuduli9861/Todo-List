@@ -49,7 +49,7 @@ const login = async(req,res) =>{
     const token = jwt.sign({email} , process.env.jwt_secrentKey,{expiresIn:"1h"})
     // console.log(token)
     res.cookie("jsontoken", token, {
-          httpOnly: true,
+          httpOnly: false,
           secure: false,         // use in production with HTTPS
           sameSite: "Lax", 
           maxAge: 60 * 60 * 1000, // 1h seconds // this 4 fields are optional
@@ -58,7 +58,7 @@ const login = async(req,res) =>{
         
         res.status(200).json({message:"User login successfully",UserId:userExist._id,UserEmail:userExist.email, token:token})
     } catch (error) {
-           res.status(500).json({ status: 500, message: "Internal Server Error", error: err.message });
+           res.status(500).json({ status: 500, message: "Internal Server Error", error: error.message });
     }
 }
 

@@ -236,7 +236,7 @@ import { IoCheckboxSharp } from "react-icons/io5";
 import { MdCheckBoxOutlineBlank } from "react-icons/md";
 import { MdModeEdit, MdDelete } from "react-icons/md";
 import axios from 'axios';
-
+import { useNavigate } from 'react-router-dom';
 const TodoList = () => {
     const [input, setInput] = React.useState("");
     const [todos, setTodos] = React.useState([]);
@@ -244,6 +244,7 @@ const TodoList = () => {
     const [editInput, setEditInput] = React.useState("");
 
     const userId = localStorage.getItem('userId') 
+    const navigate = useNavigate()
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -261,7 +262,7 @@ const TodoList = () => {
                         completed: false,
                     }
                 ]
-            });
+            },{withCredentials: true});
 
             if (res.status === 201) {
                 alert("Todo added successfully");
@@ -269,17 +270,23 @@ const TodoList = () => {
                 fetchData();
             }
         } catch (error) {
+            if(error.response && error.response.status === 401){
+          navigate("/login")
+        }
             console.log(error);
         }
     };
 
     const fetchData = async () => {
         try {
-            const res = await axios.get(`http://localhost:5000/av1/readlist/${userId}`);
+            const res = await axios.get(`http://localhost:5000/av1/readlist/${userId}`,{withCredentials: true});
             if (res.status === 200) {
                 setTodos(res.data.data.tasks);
             }
         } catch (error) {
+            if(error.response && error.response.status === 401){
+          navigate("/login")
+        }
             console.log(error);
         }
     };
@@ -290,12 +297,15 @@ const TodoList = () => {
 
     const deleteTodo = async (taskId) => {
         try {
-            const res = await axios.delete(`http://localhost:5000/av1/deletelist/${userId}/${taskId}`);
+            const res = await axios.delete(`http://localhost:5000/av1/deletelist/${userId}/${taskId}`,{withCredentials: true});
             if (res.status === 200) {
                 alert("Task deleted successfully");
                 fetchData();
             }
         } catch (error) {
+            if(error.response && error.response.status === 401){
+          navigate("/login")
+        }
             console.log(error);
         }
     };
@@ -305,7 +315,7 @@ const TodoList = () => {
         try {
             const res = await axios.put(`http://localhost:5000/av1/updatelist/${userId}/${taskId}`, {
                 newTask: editInput
-            });
+            },{withCredentials: true});
 
             if (res.status === 200) {
                 alert("Task updated successfully");
@@ -314,6 +324,9 @@ const TodoList = () => {
                 fetchData();
             }
         } catch (error) {
+            if(error.response && error.response.status === 401){
+          navigate("/login")
+        }
             console.log(error);
         }
     };
@@ -324,12 +337,15 @@ const TodoList = () => {
   try {
     const res = await axios.put(`http://localhost:5000/av1/completed/${userId}/${taskId}`, {
       completed: !completed,
-    });
+    },{withCredentials: true});
     if (res.status === 200) {
       fetchData(); // reload updated todos
     }
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    if(error.response && error.response.status === 401){
+          navigate("/login")
+        }
+    console.log(error);
   }
 };
 
@@ -354,7 +370,7 @@ const TodoList = () => {
                         </div>
                         <ul className="bg-fuchsia-300 w-full mt-9 p-5 rounded-[10px]">
                             {
-                                todos.map((value, index) => (
+                                [...todos].reverse().map((value, index) => (
                                     <li key={index} className='bg-lime-500 flex justify-between mb-2 p-3 rounded-[10px]'>
                                         <div className="flex items-center">
                                             <button onClick={()=>{toggleCheckbox(value._id, value.completed)}}>

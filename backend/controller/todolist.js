@@ -64,28 +64,26 @@ const updateList = async(req,res) =>{
     res.status(500).json({ message: "Server error", error: err.message });
   }
 }
-const deleteList = async(req,res) =>{
-    const userId = req.params.id;
-    const taskId = req.params.taskId;
-   try {
-    const user = await todoModel.findOne({userId});
+const deleteList = async (req, res) => {
+  const userId = req.params.id;
+  const taskId = req.params.taskId;
 
-    if (!user) return res.status(404).json({ message: "User not found" });
+  try {
+    const user = await todoModel.updateOne(
+      { userId },
+      { $pull: { tasks: { _id: taskId } } }
+    );
 
-    if (taskId < 0 || taskId >= user.tasks.length) {
-      return res.status(400).json({ message: "Invalid index" });
+    if (user.modifiedCount === 0) {
+      return res.status(404).json({ message: "Task not found or already deleted" });
     }
 
-    // Remove task at index
-    user.tasks.splice(taskId, 1);
-
-    await user.save();
-
-    res.status(200).json({ message: "Task deleted", tasks: user.tasks });
+    res.status(200).json({ message: "Task deleted successfully" });
   } catch (err) {
     res.status(500).json({ message: "Server error", error: err.message });
   }
-}
+};
+
 
 const completedList = async(req,res) =>{
     const taskId = req.params.taskId;
