@@ -43,21 +43,26 @@ const readList = async(req,res) =>{
     
 }
 const updateList = async(req,res) =>{
-    const {addList} = req.body;
-    const list_id = req.params.id;
-    if(!addList){
-        return res.status(422).json({ status: 422, message: "Bad Request", error: "All fields are required" });
+    const userId = req.params.id;
+    const taskId = req.params.taskId;
+    const {newTask} = req.body
+     try {
+    const todo = await todoModel.findOne({ userId });
+
+    if (!todo) return res.status(404).json({ message: "Todo not found" });
+
+    if (taskId < 0 || taskId >= todo.tasks.length) {
+      return res.status(400).json({ message: "Invalid index" });
     }
-    try {
-        const updatedTodo = await todoModel.findByIdAndUpdate(list_id, {addList}, {new: true});
-        if(!updatedTodo) {
-            return res.status(404).json({ status: 404, message: "Not Found", error: "Todo item not found" });
-        }
-        await updatedTodo.save();
-        return res.status(200).json({ status: 200, message: "Success", data: updatedTodo });
-    } catch (error) {
-        return res.status(500).json({ status: 500, message: "Internal Server Error", error: error.message });
-    }
+
+    // Update specific task
+    todo.tasks[taskId].task = newTask;
+    await todo.save();
+
+    res.status(200).json({ message: "Task updated", tasks: todo.tasks });
+  } catch (err) {
+    res.status(500).json({ message: "Server error", error: err.message });
+  }
 }
 const deleteList = async(req,res) =>{
     const userId = req.params.id;

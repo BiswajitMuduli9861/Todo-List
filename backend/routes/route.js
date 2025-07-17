@@ -12,7 +12,7 @@ router.post("/login", login)
 //Todo List Route
 router.post("/addlist", addList)
 router.get("/readlist/:id", readList)
-router.put("/updatelist/:id", updateList)
+router.put("/updatelist/:id/:taskId", updateList)
 router.delete("/deletelist/:id/:taskId", deleteList)
 
 module.exports = router
