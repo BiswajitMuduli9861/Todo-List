@@ -233,6 +233,7 @@
 
 import React, { useEffect } from 'react';
 import { IoCheckboxSharp } from "react-icons/io5";
+import { MdCheckBoxOutlineBlank } from "react-icons/md";
 import { MdModeEdit, MdDelete } from "react-icons/md";
 import axios from 'axios';
 
@@ -300,7 +301,6 @@ const TodoList = () => {
     };
 
     const handleUpdate = async (taskId) => {
-        // const taskId = todos[index]._id;
 
         try {
             const res = await axios.put(`http://localhost:5000/av1/updatelist/${userId}/${taskId}`, {
@@ -317,6 +317,22 @@ const TodoList = () => {
             console.log(error);
         }
     };
+
+
+   const toggleCheckbox = async (taskId, completed) => {
+    console.log("Tooglge check box",completed,taskId)
+  try {
+    const res = await axios.put(`http://localhost:5000/av1/completed/${userId}/${taskId}`, {
+      completed: !completed,
+    });
+    if (res.status === 200) {
+      fetchData(); // reload updated todos
+    }
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 
     return (
         <div className="h-screen">
@@ -341,7 +357,13 @@ const TodoList = () => {
                                 todos.map((value, index) => (
                                     <li key={index} className='bg-lime-500 flex justify-between mb-2 p-3 rounded-[10px]'>
                                         <div className="flex items-center">
-                                            <IoCheckboxSharp className='text-2xl' />
+                                            <button onClick={()=>{toggleCheckbox(value._id, value.completed)}}>
+                                                 {value.completed ? (
+                                                        <IoCheckboxSharp className="text-2xl text-green-700" />
+                                                    ) : (
+                                                        <MdCheckBoxOutlineBlank className="text-2xl text-gray-600" />
+                                                    )}
+                                            </button>
                                             {editIndex === index ? (
                                                 <input
                                                     value={editInput}
@@ -353,7 +375,7 @@ const TodoList = () => {
                                                     autoFocus
                                                 />
                                             ) : (
-                                                <h3 className="ml-2">{value.task}</h3>
+                                                <h3 className={`${value.completed ? 'line-through text-gray-500' : ''} ml-2`}>{value.task}</h3>
                                             )}
                                         </div>
                                         <div className="flex items-center">

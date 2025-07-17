@@ -4,7 +4,7 @@ const todoModel = require('../models/todoModel');
 
 const addList = async (req, res) => {
     const { userId, tasks } = req.body;
-    console.log(req.body)
+    // console.log(req.body)
 
     if (!tasks) {
         return res.status(422).json({ status: 422, message: "Bad Request", error: "All fields are required" });
@@ -30,7 +30,7 @@ const addList = async (req, res) => {
 
 const readList = async(req,res) =>{
     const userId =req.params.id;
-    console.log(userId)
+    // console.log(userId)
     if(!userId){
         return res.status(422).json({ status: 422, message: "Bad Request", error: "userId is required" });
     }
@@ -87,5 +87,25 @@ const deleteList = async(req,res) =>{
   }
 }
 
+const completedList = async(req,res) =>{
+    const taskId = req.params.taskId;
+    const userId = req.params.id;
+    const {completed} = req.body;
+    try {
+        const user = await todoModel.updateOne(
+            {userId, "tasks._id": taskId},          //"tasks._id": taskId matlab hai ki jab . lagaoge tabuse karna "tasks._id"
+            {
+                $set: {
+                "tasks.$.completed": completed,
+                },
+            }
+        ); 
+          res.status(200).json({ message: "Task updated successfully", data: user });
+    } catch (error) {
+     res.status(500).json({ message: "Server error", error: error.message });   
+    }
 
-module.exports = {addList,readList, updateList, deleteList}
+}
+
+
+module.exports = {addList,readList, updateList, deleteList, completedList}

@@ -1,6 +1,6 @@
 const express = require('express')
 const {signUp, login} = require('../controller/controller');
-const { addList, readList, updateList, deleteList } = require('../controller/todolist');
+const { addList, readList, updateList, deleteList, completedList } = require('../controller/todolist');
 const { authenticate } = require('../middleware/authenticate');
 
 
@@ -13,6 +13,7 @@ router.post("/login", login)
 router.post("/addlist", addList)
 router.get("/readlist/:id", readList)
 router.put("/updatelist/:id/:taskId", updateList)
+router.put("/completed/:id/:taskId", completedList)
 router.delete("/deletelist/:id/:taskId", deleteList)
 
 module.exports = router
