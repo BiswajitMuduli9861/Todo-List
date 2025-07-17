@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Login from './components/Login'
 import Dashboard from './components/Dashboard'
+import TodoList from './components/TodoList'
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
         <Route path="/" element={<Dashboard/>} />
         <Route path="/signup" element={<Signup/>} />
         <Route path="/login" element={<Login/>} />
+        <Route path="/todolist" element={<TodoList/>} />
       </Routes>
     </BrowserRouter>
       

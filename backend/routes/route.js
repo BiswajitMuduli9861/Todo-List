@@ -10,9 +10,9 @@ router.post("/signup", signUp)
 router.post("/login", login)
 
 //Todo List Route
-router.post("/addlist", authenticate, addList)
-router.get("/readlist/:email",  authenticate, readList)
-router.put("/updatelist/:id",  authenticate, updateList)
-router.delete("/deletelist/:id",  authenticate, deleteList)
+router.post("/addlist", addList)
+router.get("/readlist/:id", readList)
+router.put("/updatelist/:id", updateList)
+router.delete("/deletelist/:id/:taskId", deleteList)
 
 module.exports = router
