@@ -5,7 +5,7 @@ import {  Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 
-const Login = () => {
+const Login = ({Login}) => {
 
       const [login, setLogin] = useState({
         email:"",
@@ -41,6 +41,7 @@ const Login = () => {
                 setCredential(false)
                 localStorage.setItem("token", res.data.token);
                 localStorage.setItem("Email-id", res.data.UserEmail);
+                localStorage.setItem("userId", res.data.UserId);
                 Login();
                 toast.success("Login Successfully", {
                     position: "top-center",
@@ -94,7 +95,10 @@ const Login = () => {
             <div className="flex w-[200%] relative transition-transform duration-300 ease-out peer-checked:-translate-x-1/2">
                 <form className="flex flex-col justify-center items-center gap-8 py-6 px-12 w-1/2" onSubmit={handleSubmit}>
                     <span className="text-center font-bold text-2xl">Login</span>
-                    <div className="w-full relative overflow-hidden">
+                    {
+                    credential ?  <span className='text-center text-amber-500 text-2xl '>Invalid Credentail</span> : <span></span> 
+                }
+                    <div className="w-full relative overflow-hidden" style={isSubmmit && login.email.trim().length===0 ? {border:"1px solid red", borderRadius:"5px"} :{}}>
                         <input
                             type="email"
                              autoComplete='off'
@@ -102,13 +106,13 @@ const Login = () => {
                                 value={login.email}
                                 onChange={handleChange}
                             className="w-full bg-transparent border-none outline-none text-white p-2 text-sm rounded transition-shadow duration-200 shadow-[0_0_0_#0e0e0e,0_0_0_rgba(95,94,94,0.25),inset_1.5px_1.5px_3px_#0e0e0e,inset_-1.5px_-1.5px_3px_#5f5e5e] focus:shadow-[0_0_0_#0e0e0e,0_0_0_rgba(95,94,94,0.25),inset_3px_3px_4px_#0e0e0e,inset_-3px_-3px_4px_#5f5e5e] peer"
-                            required
+                            placeholder='email'
                         />
                         <label className="absolute top-1/2 left-2 transition-transform duration-200 ease-in transform -translate-y-1/2 text-xs select-none pointer-events-none text-gray-400 peer-focus:-translate-x-[150%] peer-valid:-translate-x-[150%]">
                             Email
                         </label>
                     </div>
-                   <div className="w-full relative overflow-hidden">
+                   <div className="w-full relative overflow-hidden" style={isSubmmit && login.password.trim().length===0 ? {border:"1px solid red",borderRadius:"5px"} :{}}>
   <input
     type={state.passwordType}
     autoComplete='off'
@@ -116,7 +120,7 @@ const Login = () => {
     value={login.password}
     onChange={handleChange}
     className="w-full bg-transparent border-none outline-none text-white p-2 text-sm rounded transition-shadow duration-200 shadow-[0_0_0_#0e0e0e,0_0_0_rgba(95,94,94,0.25),inset_1.5px_1.5px_3px_#0e0e0e,inset_-1.5px_-1.5px_3px_#5f5e5e] focus:shadow-[0_0_0_#0e0e0e,0_0_0_rgba(95,94,94,0.25),inset_3px_3px_4px_#0e0e0e,inset_-3px_-3px_4px_#5f5e5e] peer pr-10"
-    required
+    placeholder="Password"
   />
 
   <label className="absolute top-1/2 left-2 transition-transform duration-200 ease-in transform -translate-y-1/2 text-xs select-none pointer-events-none text-gray-400 peer-focus:-translate-x-[150%] peer-valid:-translate-x-[150%]">

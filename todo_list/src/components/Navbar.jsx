@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { RxCross1 } from "react-icons/rx";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false); // Menu toggle state
+  const [profileOpen, setProfileOpen] = useState(false);
 
   return (
+    <>
     <div>
       <nav className="bg-gray-800">
         <div className="mx-auto max-w-8xl px-2 sm:px-6 lg:px-8">
@@ -17,7 +20,7 @@ const Navbar = () => {
                 aria-controls="mobile-menu"
                 aria-expanded={isOpen}
                 onClick={() => setIsOpen(!isOpen)}
-              >
+                >
                 <span className="sr-only">Open main menu</span>
                 {/* Hamburger Icon */}
                 <svg
@@ -42,12 +45,12 @@ const Navbar = () => {
                   strokeWidth="1.5"
                   stroke="currentColor"
                   aria-hidden="true"
-                >
+                  >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     d="M6 18L18 6M6 6l12 12"
-                  />
+                    />
                 </svg>
               </button>
             </div>
@@ -71,25 +74,18 @@ const Navbar = () => {
 
               {/* User menu */}
               <div className="relative ml-3">
-                <div>
-                  <button
-                    type="button"
-                    className="relative flex rounded-full bg-gray-800 text-sm focus:outline-hidden focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-gray-800"
-                    id="user-menu-button"
-                  >
-                    <span className="sr-only">Open user menu</span>
-                    <img
-                      className="size-8 rounded-full"
-                      src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e"
-                      alt=""
-                    />
-                  </button>
-                </div>
+                  <div className='bg-amber-500 w-10 h-10 rounded-full flex justify-center items-center' onClick={()=>{setProfileOpen(true)}}>
+
+                   <h2 className='text-2xl'>B</h2>
+                  </div>
+                 
+                  
+               
               </div>
             </div>
           </div>
         </div>
-
+        
         {/* Mobile menu */}
         {isOpen && (
           <div className="sm:hidden" id="mobile-menu">
@@ -103,6 +99,28 @@ const Navbar = () => {
         )}
       </nav>
     </div>
+
+
+        {
+          profileOpen &&(
+
+                  <div className='w-[200px] h-[150px] me-6 bg-blue-600 z-10 block absolute end-[20px]'>
+                    
+                      <div className='bg-fuchsia-700 absolute end-0 w-7 h-7 flex justify-center rounded-full' onClick={()=>{setProfileOpen(false)}}>
+                        <button className='text-1xl '><RxCross1 /></button>
+                      </div>
+                        <div className="flex flex-col justify-center bg-neutral-100 h-38">
+                          <span>bmudu</span>
+                          <span>Logout</span>
+                          <span>Acoount Delete</span>
+                        </div>
+                    
+                  
+                  </div>
+          )
+        }
+
+        </>
   );
 };
 
