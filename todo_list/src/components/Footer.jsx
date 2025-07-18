@@ -11,7 +11,7 @@ const Footer = () => {
           <span className="absolute h-[60px] w-[60px] rounded-full bg-[#0077b5] opacity-0 group-hover:opacity-40 translate-x-1 -translate-y-1 transition-all" />
           <span className="absolute h-[60px] w-[60px] rounded-full bg-[#0077b5] opacity-0 group-hover:opacity-60 translate-x-2 -translate-y-2 transition-all" />
 
-          <a href="https://www.linkedin.com/in/biswajit-muduli-9a85a4267/"  className="inline-block">
+          <a href="https://www.linkedin.com/in/biswajit-muduli-9a85a4267/" target='_blank' className="inline-block">
             <FaLinkedinIn className="h-[60px] w-[60px] p-4 rounded-full text-yellow-500 shadow-inner shadow-white/30 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all" />
           </a>
 
@@ -26,7 +26,7 @@ const Footer = () => {
           <span className="absolute h-[60px] w-[60px] rounded-full bg-gray-800 opacity-0 group-hover:opacity-40 translate-x-1 -translate-y-1 transition-all" />
           <span className="absolute h-[60px] w-[60px] rounded-full bg-gray-800 opacity-0 group-hover:opacity-60 translate-x-2 -translate-y-2 transition-all" />
 
-          <a href="https://github.com/BiswajitMuduli9861" className="inline-block">
+          <a href="https://github.com/BiswajitMuduli9861" target='_blank' className="inline-block">
             <FaGithub className="h-[60px] w-[60px] p-4 rounded-full text-yellow-500 shadow-inner shadow-white/30 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all" />
           </a>
 
@@ -41,7 +41,7 @@ const Footer = () => {
           <span className="absolute h-[60px] w-[60px] rounded-full bg-red-500 opacity-0 group-hover:opacity-40 translate-x-1 -translate-y-1 transition-all" />
           <span className="absolute h-[60px] w-[60px] rounded-full bg-red-500 opacity-0 group-hover:opacity-60 translate-x-2 -translate-y-2 transition-all" />
 
-          <a href="mailto:bmuduli126@gmail.com" className="inline-block">
+          <a href="mailto:bmuduli126@gmail.com" target='_blank' className="inline-block">
             <FaEnvelope className="h-[60px] w-[60px] p-4 rounded-full text-yellow-500 shadow-inner shadow-white/30 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all" />
           </a>
 
