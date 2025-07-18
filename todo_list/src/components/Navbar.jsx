@@ -1,13 +1,54 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { RxCross1 } from "react-icons/rx";
+import { MdOutlineLogout } from "react-icons/md";
+import { FaRegUser } from "react-icons/fa";
+import { AiOutlineUserDelete } from "react-icons/ai";
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false); // Menu toggle state
+  const [isOpen, setIsOpen] = useState(false); 
   const [profileOpen, setProfileOpen] = useState(false);
+
+  const navigate = useNavigate();
+
+   const profile = localStorage.getItem('Email-id') ||'@'
+   const show = localStorage.getItem('Email-id')
+   const letter = profile.charAt(0).toLocaleUpperCase();
+    const userId = localStorage.getItem('userId') 
+
+   const logout = () =>{
+       localStorage.removeItem('userExist');
+        localStorage.removeItem('token');
+        localStorage.removeItem('Email-id')
+        alert("Logout User")
+
+                setTimeout(() => {
+                    setProfileOpen(false)
+                    navigate('/login');
+                }, 1000);
+   }
+
+   const deleteAccount = async () => {
+  try {
+    await axios.delete(`http://localhost:5000/av1/user/delete/${userId}`);
+    alert("Account deleted successfully");
+    localStorage.removeItem('userExist');
+        localStorage.removeItem('token');
+        localStorage.removeItem('Email-id')
+        setProfileOpen(false)
+        navigate('/login');
+  } catch (err) {
+    console.error(err.response?.data || err.message);
+  }
+};
+
+
 
   return (
     <>
+      
     <div>
       <nav className="bg-gray-800">
         <div className="mx-auto max-w-8xl px-2 sm:px-6 lg:px-8">
@@ -61,9 +102,11 @@ const Navbar = () => {
               <div className="hidden sm:ml-6 sm:block">
                 <div className="flex space-x-4">
                   <Link to="/" className="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white" aria-current="page">Dashboard</Link>
-                  <a href="#" className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">About</a>
                   <Link to="todolist" className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">todolist</Link>
-                  <Link to="/login" className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Login</Link>
+                  {
+                    show ? <span></span> : <Link to="/login" className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Login</Link>
+                  }
+                  
                 </div>
               </div>
             </div>
@@ -73,15 +116,18 @@ const Navbar = () => {
              
 
               {/* User menu */}
-              <div className="relative ml-3">
-                  <div className='bg-amber-500 w-10 h-10 rounded-full flex justify-center items-center' onClick={()=>{setProfileOpen(true)}}>
+              {
+                show ? <div className="relative ml-3">
+                  <div className='bg-amber-500 w-10 h-10 rounded-full flex justify-center items-center cursor-pointer' onClick={()=>{setProfileOpen(true)}}>
 
-                   <h2 className='text-2xl'>B</h2>
+                   <h2 className='text-2xl'>{letter}</h2>
                   </div>
                  
                   
                
-              </div>
+              </div> : <span></span>
+              }
+             
             </div>
           </div>
         </div>
@@ -90,10 +136,11 @@ const Navbar = () => {
         {isOpen && (
           <div className="sm:hidden" id="mobile-menu">
             <div className="space-y-1 px-2 pt-2 pb-3">
-              <a href="#" className="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white" aria-current="page">Dashboard</a>
-              <a href="#" className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">About</a>
-              <a href="#" className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">todolist</a>
-              <a href="#" className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">login</a>
+              <Link to="/" className="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white" aria-current="page">Dashboard</Link>
+              <Link to="todolist" className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">todolist</Link>
+                 {
+                    show ? <span></span> : <Link to="/login" className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Login</Link>
+                  }
             </div>
           </div>
         )}
@@ -104,15 +151,27 @@ const Navbar = () => {
         {
           profileOpen &&(
 
-                  <div className='w-[200px] h-[150px] me-6 bg-blue-600 z-10 block absolute end-[20px]'>
+                  <div className='w-[250px] h-[180px] me-6 bg-blue-600 z-10 block absolute end-[20px] rounded-2xl'>
                     
-                      <div className='bg-fuchsia-700 absolute end-0 w-7 h-7 flex justify-center rounded-full' onClick={()=>{setProfileOpen(false)}}>
-                        <button className='text-1xl '><RxCross1 /></button>
+                      <div className=' absolute end-0 w-7 h-7 flex justify-center rounded-full me-2 mt-2 hover:bg-gray-50' onClick={()=>{setProfileOpen(false)}}>
+                        <button className='text-1xl text-white  text cursor-pointer hover:text-black' ><RxCross1 /></button>
                       </div>
-                        <div className="flex flex-col justify-center bg-neutral-100 h-38">
-                          <span>bmudu</span>
-                          <span>Logout</span>
-                          <span>Acoount Delete</span>
+                        <div className="flex flex-col justify-center bg-black h-45 rounded-2xl">
+                           <div className='flex m-1 cursor-pointer'>
+                            <FaRegUser className='text-gray-50 mt-[5px] ms-1'/>
+                            <span className='text-gray-50 font-medium ms-2'> {profile}</span>
+                          </div>
+                          <div className='flex m-1 cursor-pointer' onClick={logout}>
+                            <MdOutlineLogout className='text-gray-50 mt-[5px] ms-1'/>
+                            <span className='text-gray-50 font-medium ms-2'> Logout</span>
+                          </div>
+                          <div className='flex m-1 cursor-pointer' onClick={deleteAccount }>
+                            <AiOutlineUserDelete className='text-gray-50 mt-[5px] ms-1'/>
+                            <span className='text-gray-50 font-medium ms-2'> Accound Delete</span>
+                          </div>
+                  
+                          
+                          
                         </div>
                     
                   

@@ -137,7 +137,7 @@ const Login = ({Login}) => {
 
                     <button
                         type="submit"
-                        className="w-full bg-transparent border-none outline-none text-white p-2 text-sm rounded transition-shadow duration-100 shadow-[1.5px_1.5px_3px_#0e0e0e,-1.5px_-1.5px_3px_rgba(95,94,94,0.25),inset_0_0_0_#0e0e0e,inset_0_-0_0_#5f5e5e] active:shadow-[0_0_0_#0e0e0e,0_0_0_rgba(95,94,94,0.25),inset_3px_3px_4px_#0e0e0e,inset_-3px_-3px_4px_#5f5e5e]"
+                        className="w-full cursor-pointer bg-transparent border-none outline-none text-white p-2 text-sm rounded transition-shadow duration-100 shadow-[1.5px_1.5px_3px_#0e0e0e,-1.5px_-1.5px_3px_rgba(95,94,94,0.25),inset_0_0_0_#0e0e0e,inset_0_-0_0_#5f5e5e] active:shadow-[0_0_0_#0e0e0e,0_0_0_rgba(95,94,94,0.25),inset_3px_3px_4px_#0e0e0e,inset_-3px_-3px_4px_#5f5e5e]"
                     >
                         Login
                     </button>

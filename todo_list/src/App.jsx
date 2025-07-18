@@ -6,7 +6,8 @@ import Navbar from './components/Navbar'
 import Login from './components/Login'
 import Dashboard from './components/Dashboard'
 import TodoList from './components/TodoList'
-// import ProtectedRoute from './component/ProtectedRoute'
+import ProtectedRoute from './components/ProtectedRoute'
+import PageNotFound from './components/PageNotFound'
 
 function App() {
 
@@ -35,7 +36,8 @@ function App() {
         <Route path="/" element={<Dashboard/>} />
         <Route path="/signup" element={<Signup/>} />
         <Route path="/login" element={<Login Login={login}/>} />
-        <Route path="/todolist" element={<TodoList/>} />
+        <Route path="/*" element={ <PageNotFound/>}/>
+        <Route path="/todolist" element={<ProtectedRoute> <TodoList/> </ProtectedRoute>} />
       </Routes>
     </BrowserRouter>
       

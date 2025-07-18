@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 const Dashboard = () => {
   return (
+    <>
     <div style={{
       minHeight: '100vh',
       background: 'radial-gradient(circle at 20% 40%, #232526 0%, #0f2027 100%)',
@@ -37,7 +38,7 @@ const Dashboard = () => {
           src="https://cdn-icons-png.flaticon.com/512/2921/2921222.png"
           alt="Todo Icon"
           style={{ width: 72, marginBottom: 28, zIndex: 1, position: 'relative', filter: 'brightness(0.85)' }}
-        />
+          />
         <h1 style={{
           marginBottom: 18,
           color: '#4f8cff',
@@ -98,7 +99,7 @@ const Dashboard = () => {
           borderRadius: '50%',
           opacity: 0.12,
           zIndex: 0,
-
+          
         }} />
         <h2 style={{
           color: '#4f8cff',
@@ -136,8 +137,17 @@ const Dashboard = () => {
           <li>Call a friend</li>
         </ul>
       </div>
-      <Footer/>
     </div>
+
+    <div className="flex justify-between bg-[#08284D]">
+      <div className='mt-9 text-white ml-14'>© 2025 YourCompanyName. All rights reserved. | Built with ❤️ using the MERN Stack.</div>
+      <div>
+
+      <Footer/>
+      </div>
+
+    </div>
+          </>
   );
 };
 
