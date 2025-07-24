@@ -29,7 +29,7 @@ const Login = ({Login}) => {
         try {
             const res = await axios.post("http://localhost:5000/av1/login",login,{withCredentials: true});
             // console.log(res.statusText)
-            console.log(res)
+            // console.log(res)
             setIsSubmmited(false)
            
                 if(res.statusText === "OK"){
@@ -153,7 +153,7 @@ const Login = ({Login}) => {
                         </label>
                     </span>
                 </form>
-                {/* Add your Sign Up form here if needed */}
+            
             </div>
         </div>
         </div>

@@ -46,9 +46,9 @@ const Signup = () => {
         try {
 
             const res =await axios.post('http://localhost:5000/av1/signup',signup,)
-            console.log(res);
+            // console.log(res);
             if(res.status === 201){
-                console.log('User created successfully');
+                // console.log('User created successfully');
                 setSignup({
                     fullName: '',
                     email: '',

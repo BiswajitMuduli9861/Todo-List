@@ -8,10 +8,12 @@ import Dashboard from './components/Dashboard'
 import TodoList from './components/TodoList'
 import ProtectedRoute from './components/ProtectedRoute'
 import PageNotFound from './components/PageNotFound'
+import { Navigate } from 'react-router-dom'
 
 function App() {
 
   const [isLoggedIn, setIsLoggedIn] = useState(false)
+ 
 
 
   useEffect(() => {
@@ -19,6 +21,13 @@ function App() {
     if (user === "true") {
       setIsLoggedIn(true);
     }
+    setTimeout(() => {
+      localStorage.removeItem("userExist")
+      localStorage.removeItem('token');
+        localStorage.removeItem('Email-id')
+        localStorage.removeItem('userId')
+        Navigate('/login')
+    }, 60 * 60 * 1000);
   }, []);
 
   const login = () => {

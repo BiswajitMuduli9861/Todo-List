@@ -9,7 +9,7 @@ const jwt = require('jsonwebtoken');
 const signUp = async (req, res) => {
     try {
         
-        console.log(req.body)
+        // console.log(req.body)
         const { fullName, email, password} = req.body;
         if (!fullName || !email || !password) {
             return res.status(422).json({ status: 422, message: "Bad Request", error: "All fields are required" });
@@ -50,9 +50,9 @@ const login = async(req,res) =>{
     // console.log(token)
     res.cookie("jsontoken", token, {
           httpOnly: false,
-          secure: false,         // use in production with HTTPS
+          secure: false,       
           sameSite: "Lax", 
-          maxAge: 60 * 60 * 1000, // 1h seconds // this 4 fields are optional
+          maxAge: 60 * 60 * 1000, 
         });
         
         

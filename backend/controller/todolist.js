@@ -12,7 +12,7 @@ const addList = async (req, res) => {
     }
 
     try {
-        // Check for existing todo with same Id
+        
         let todo = await todoModel.findOne({ userId });
         if(todo){
             todo.tasks.push(...tasks);
@@ -136,7 +136,7 @@ const completedList = async(req,res) =>{
     const {completed} = req.body;
     try {
         const user = await todoModel.updateOne(
-            {userId, "tasks._id": taskId},          //"tasks._id": taskId matlab hai ki jab . lagaoge tabuse karna "tasks._id"
+            {userId, "tasks._id": taskId},    
             {
                 $set: {
                 "tasks.$.completed": completed,

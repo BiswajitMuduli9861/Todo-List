@@ -22,6 +22,7 @@ const Navbar = () => {
        localStorage.removeItem('userExist');
         localStorage.removeItem('token');
         localStorage.removeItem('Email-id')
+        localStorage.removeItem('userId')
         alert("Logout User")
 
                 setTimeout(() => {

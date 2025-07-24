@@ -235,6 +235,7 @@ import React, { useEffect } from 'react';
 import { IoCheckboxSharp } from "react-icons/io5";
 import { MdCheckBoxOutlineBlank } from "react-icons/md";
 import { MdModeEdit, MdDelete } from "react-icons/md";
+import { FaCheck} from "react-icons/fa";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
@@ -375,7 +376,7 @@ const TodoList = () => {
 
 
    const toggleCheckbox = async (taskId, completed) => {
-    console.log("Tooglge check box",completed,taskId)
+    // console.log("Tooglge check box",completed,taskId)
   try {
     const res = await axios.put(`http://localhost:5000/av1/completed/${userId}/${taskId}`, {
       completed: !completed,
@@ -405,8 +406,8 @@ const TodoList = () => {
                                     type="text"
                                     value={input}
                                     onChange={(e) => setInput(e.target.value)}
-                                    placeholder='Add Item'
-                                    className="bg-amber-500 w-full rounded-s-2xl h-15 pl-7 placeholder:text-white placeholder:font-medium placeholder:text-[20px] outline-0"
+                                    placeholder='Enter Item'
+                                    className="bg-amber-500 w-full rounded-s-2xl h-15 pl-7 placeholder:text-white placeholder:font-medium placeholder:text-[20px] outline-0 text-white text-[22px]"
                                 />
                                 <button type="submit" className='bg-indigo-500 w-[90px] rounded-e-2xl text-white font-medium cursor-pointer' >Add Item</button>
                             </form>
@@ -445,7 +446,10 @@ const TodoList = () => {
                                                     setEditInput(value.task);
                                                 }}
                                             >
-                                                <MdModeEdit className='cursor-pointer'/>
+                                                {/* <MdModeEdit className='cursor-pointer'/> */}
+                                                {
+                                                    editIndex === index ? <div onClick={()=>handleUpdate(value._id)}><FaCheck className='text-blue-600'/></div>: <MdModeEdit/>
+                                                }
                                             </div>
                                             <div
                                                 className="text-2xl text-red-700 bg-white p-1 rounded-[5px] ms-2"

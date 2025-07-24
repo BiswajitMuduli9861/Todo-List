@@ -140,7 +140,7 @@ const Dashboard = () => {
     </div>
 
     <div className="flex justify-between bg-[#08284D] h-68 sm:h-47 md:h-27">
-      <div className='mt-9 text-white ml-14 lg:ms-30 xl:ms-52'>© 2025  Gravity Company. All rights reserved. | Built with ❤️ using the MERN Stack.</div>
+      <div className='mt-9 text-white ml-14 lg:ms-30 xl:ms-52'>© 2025  Biswajit Company. All rights reserved. | Built with ❤️ using the MERN Stack.</div>
       <div>
 
       <Footer/>
