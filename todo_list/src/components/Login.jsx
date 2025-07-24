@@ -32,7 +32,7 @@ const Login = ({Login}) => {
             // console.log(res)
             setIsSubmmited(false)
            
-                if(res.statusText === 200){
+                if(res.status === 200){
 
                     setLogin({
                         email:"",
