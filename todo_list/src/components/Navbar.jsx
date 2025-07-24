@@ -33,7 +33,7 @@ const Navbar = () => {
 
    const deleteAccount = async () => {
   try {
-    await axios.delete(`http://localhost:5000/av1/user/delete/${userId}`);
+    await axios.delete(`https://todo-list-5jui.onrender.com/av1/user/delete/${userId}`);
     alert("Account deleted successfully");
     localStorage.removeItem('userExist');
         localStorage.removeItem('token');

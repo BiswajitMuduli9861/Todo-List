@@ -7,7 +7,7 @@ const path = require('path');
 app.use(cookieParser())
 app.use(express.json()); 
 app.use(cors({
-  origin: 'http://localhost:5173', 
+  origin: 'https://todo-list-5jui.onrender.com/', 
   credentials: true               
 }));
 const _dirname = path.resolve();

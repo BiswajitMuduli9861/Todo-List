@@ -256,7 +256,7 @@ const TodoList = () => {
         }
 
         try {
-            const res = await axios.post("http://localhost:5000/av1/addlist", {
+            const res = await axios.post("https://todo-list-5jui.onrender.com/av1/addlist", {
                 userId: userId,
                 tasks: [
                     {
@@ -289,7 +289,7 @@ const TodoList = () => {
 
     const fetchData = async () => {
         try {
-            const res = await axios.get(`http://localhost:5000/av1/readlist/${userId}`,{withCredentials: true});
+            const res = await axios.get(`https://todo-list-5jui.onrender.com/av1/readlist/${userId}`,{withCredentials: true});
             if (res.status === 200) {
                 setTodos(res.data.data.tasks);
             }
@@ -307,7 +307,7 @@ const TodoList = () => {
 
     const deleteTodo = async (taskId) => {
         try {
-            const res = await axios.delete(`http://localhost:5000/av1/deletelist/${userId}/${taskId}`,{withCredentials: true});
+            const res = await axios.delete(`https://todo-list-5jui.onrender.com/av1/deletelist/${userId}/${taskId}`,{withCredentials: true});
             if (res.status === 200) {
                  toast.success("Delete Successfully", {
                                     position: "top-center",
@@ -329,7 +329,7 @@ const TodoList = () => {
     };
 
     const clearAll = async () => {
-     const res = await axios.delete(`http://localhost:5000/av1/todo/clear/${userId}`);
+     const res = await axios.delete(`https://todo-list-5jui.onrender.com/av1/todo/clear/${userId}`);
   if (res.status === 200) {
                  toast.success("Clear All List", {
                                     position: "top-center",
@@ -348,7 +348,7 @@ const TodoList = () => {
     const handleUpdate = async (taskId) => {
 
         try {
-            const res = await axios.put(`http://localhost:5000/av1/updatelist/${userId}/${taskId}`, {
+            const res = await axios.put(`https://todo-list-5jui.onrender.com/av1/updatelist/${userId}/${taskId}`, {
                 newTask: editInput
             },{withCredentials: true});
 
@@ -378,7 +378,7 @@ const TodoList = () => {
    const toggleCheckbox = async (taskId, completed) => {
     // console.log("Tooglge check box",completed,taskId)
   try {
-    const res = await axios.put(`http://localhost:5000/av1/completed/${userId}/${taskId}`, {
+    const res = await axios.put(`https://todo-list-5jui.onrender.com/av1/completed/${userId}/${taskId}`, {
       completed: !completed,
     },{withCredentials: true});
     if (res.status === 200) {
