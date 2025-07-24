@@ -448,7 +448,7 @@ const TodoList = () => {
                                             >
                                                 {/* <MdModeEdit className='cursor-pointer'/> */}
                                                 {
-                                                    editIndex === index ? <div onClick={()=>handleUpdate(value._id)}><FaCheck className='text-blue-600'/></div>: <MdModeEdit/>
+                                                    editIndex === index ? <div onClick={()=>handleUpdate(value._id)}><FaCheck className='text-blue-600 cursor-pointer' /></div>: <MdModeEdit className='cursor-pointer'/>
                                                 }
                                             </div>
                                             <div
